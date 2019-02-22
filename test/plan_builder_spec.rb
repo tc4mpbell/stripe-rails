@@ -175,6 +175,27 @@ describe 'building plans' do
       }.must_raise Stripe::InvalidConfigurationError
     end
 
+    it 'accepts an collection of property hashes for tiers' do
+      Stripe.plan :graduated do |plan|
+        plan.name = "Acme as a service"
+        plan.billing_scheme = "tiered"
+        plan.interval = "month"
+        plan.tiers = [
+          {
+            amount: 0,
+            up_to: 10
+          },
+          {
+            amount: 1000,
+            up_to: nil
+          }
+        ]
+        plan.tiers_mode = "graduated"
+      end
+
+      Stripe::Plans::GRADUATED.wont_be_nil
+    end
+
     describe 'name and product id validation' do
       it 'should be valid when using just the product id' do
         Stripe.plan :prodded do |plan|
@@ -275,6 +296,62 @@ describe 'building plans' do
             Stripe::Plans::METERED.put!
           end
 
+          it 'creates a tiered plan' do
+            Stripe::Plan.expects(:create).with(
+              :id => :tiered,
+              :currency => 'usd',
+              :product => {
+                :name => 'Tiered',
+                :statement_descriptor => nil,
+              },
+              :interval => 'month',
+              :interval_count => 1,
+              :trial_period_days => 0,
+              :billing_scheme => 'tiered',
+              :tiers_mode => 'graduated',
+              :tiers => [
+                {
+                  amount: 0,
+                  up_to: 10
+                },
+                {
+                  amount: 1000,
+                  up_to: nil
+                }
+              ]
+            )
+            Stripe::Plans::TIERED.put!
+          end
+
+          it 'creates a tiered plan with flat amount' do
+            Stripe::Plan.expects(:create).with(
+              :id => :tiered_with_flat_amount,
+              :currency => 'usd',
+              :product => {
+                :name => 'Tiered With Flat Amount',
+                :statement_descriptor => nil,
+              },
+              :interval => 'month',
+              :interval_count => 1,
+              :trial_period_days => 0,
+              :billing_scheme => 'tiered',
+              :tiers_mode => 'graduated',
+              :tiers => [
+                {
+                  amount: 0,
+                  flat_amount: 10000,
+                  up_to: 10
+                },
+                {
+                  amount: 1000,
+                  flat_amount: 0,
+                  up_to: nil
+                }
+              ]
+            )
+            Stripe::Plans::TIERED_WITH_FLAT_AMOUNT.put!
+          end
+
 
           describe 'when using a product id' do
             before do
@@ -321,6 +398,62 @@ describe 'building plans' do
             )
 
             subject
+          end
+
+          it 'creates a tiered plan' do
+            Stripe::Plan.expects(:create).with(
+              :id => :tiered,
+              :currency => 'usd',
+              :product => {
+                :name => 'Tiered',
+                :statement_descriptor => nil,
+              },
+              :interval => 'month',
+              :interval_count => 1,
+              :trial_period_days => 0,
+              :billing_scheme => 'tiered',
+              :tiers_mode => 'graduated',
+              :tiers => [
+                {
+                  amount: 0,
+                  up_to: 10
+                },
+                {
+                  amount: 1000,
+                  up_to: nil
+                }
+              ]
+            )
+            Stripe::Plans::TIERED.put!
+          end
+
+          it 'creates a tiered plan with flat amount' do
+            Stripe::Plan.expects(:create).with(
+              :id => :tiered_with_flat_amount,
+              :currency => 'usd',
+              :product => {
+                :name => 'Tiered With Flat Amount',
+                :statement_descriptor => nil,
+              },
+              :interval => 'month',
+              :interval_count => 1,
+              :trial_period_days => 0,
+              :billing_scheme => 'tiered',
+              :tiers_mode => 'graduated',
+              :tiers => [
+                {
+                  amount: 0,
+                  flat_amount: 10000,
+                  up_to: 10
+                },
+                {
+                  amount: 1000,
+                  flat_amount: 0,
+                  up_to: nil
+                }
+              ]
+            )
+            Stripe::Plans::TIERED_WITH_FLAT_AMOUNT.put!
           end
         end
       end
