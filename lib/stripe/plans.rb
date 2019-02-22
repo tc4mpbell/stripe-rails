@@ -12,15 +12,18 @@ module Stripe
                     :interval,
                     :interval_count,
                     :metadata,
-                    :name, 
+                    :name,
                     :nickname,
                     :product_id,
                     :statement_descriptor,
+                    :tiers,
                     :tiers_mode,
                     :trial_period_days,
                     :usage_type
 
-      validates_presence_of :id, :amount, :currency
+      validates_presence_of :id, :currency
+
+      validates_presence_of :amount, unless: ->(p) { p.tiers&.any? { |tier| tier[:amount].present? }}
 
       validates_inclusion_of  :interval,
                               in: %w(day week month year),
@@ -82,7 +85,9 @@ module Stripe
           usage_type: usage_type,
           aggregate_usage: aggregate_usage,
           billing_scheme: billing_scheme,
-          nickname: nickname
+          nickname: nickname,
+          tiers_mode: tiers_mode,
+          tiers: tiers
         }
       end
 
@@ -101,7 +106,10 @@ module Stripe
           interval_count: interval_count,
           trial_period_days: trial_period_days,
           metadata: metadata,
-          statement_descriptor: statement_descriptor
+          statement_descriptor: statement_descriptor,
+          billing_scheme: billing_scheme,
+          tiers_mode: tiers_mode,
+          tiers: tiers
         }
       end
     end
