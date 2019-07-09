@@ -1,4 +1,21 @@
-## 1.6.0 (2010-01-08)
+## 1.7.2 (2019-06-29)
+
+* fixes `require` error after update from Stripe gem. Thanks @dark-panda !
+
+## 1.7.1 (2019-05-24)
+
+* Don't assume sprockets are loaded thanks @manusajith
+
+## 1.7.0 (2019-05-09)
+
+* [New Feature] add support for Plan to use a constant name different from plan id thanks @alexagranov !
+* Add checkout.session.completed webhook thanks @Nitrino !
+
+## 1.6.1 (2019-03-04)
+
+* Add new invoice webhooks thanks @noahezekwugo !
+
+## 1.6.0 (2019-01-08)
 
 * New Year New Feature: Easily include Stripe Elements into your project thanks to @garrettqmartin8 !
 * Travis is now testing the gem on Ruby 2.6.0
