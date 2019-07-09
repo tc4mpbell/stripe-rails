@@ -182,11 +182,11 @@ describe 'building plans' do
         plan.interval = "month"
         plan.tiers = [
           {
-            amount: 0,
+            unit_amount: 0,
             up_to: 10
           },
           {
-            amount: 1000,
+            unit_amount: 1000,
             up_to: nil
           }
         ]
@@ -311,11 +311,11 @@ describe 'building plans' do
               :tiers_mode => 'graduated',
               :tiers => [
                 {
-                  amount: 0,
+                  unit_amount: 0,
                   up_to: 10
                 },
                 {
-                  amount: 1000,
+                  unit_amount: 1000,
                   up_to: nil
                 }
               ]
@@ -338,12 +338,12 @@ describe 'building plans' do
               :tiers_mode => 'graduated',
               :tiers => [
                 {
-                  amount: 0,
+                  unit_amount: 0,
                   flat_amount: 10000,
                   up_to: 10
                 },
                 {
-                  amount: 1000,
+                  unit_amount: 1000,
                   flat_amount: 0,
                   up_to: nil
                 }
@@ -415,11 +415,11 @@ describe 'building plans' do
               :tiers_mode => 'graduated',
               :tiers => [
                 {
-                  amount: 0,
+                  unit_amount: 0,
                   up_to: 10
                 },
                 {
-                  amount: 1000,
+                  unit_amount: 1000,
                   up_to: nil
                 }
               ]
@@ -442,12 +442,12 @@ describe 'building plans' do
               :tiers_mode => 'graduated',
               :tiers => [
                 {
-                  amount: 0,
+                  unit_amount: 0,
                   flat_amount: 10000,
                   up_to: 10
                 },
                 {
-                  amount: 1000,
+                  unit_amount: 1000,
                   flat_amount: 0,
                   up_to: nil
                 }

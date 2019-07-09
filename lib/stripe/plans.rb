@@ -23,7 +23,7 @@ module Stripe
 
       validates_presence_of :id, :currency
 
-      validates_presence_of :amount, unless: ->(p) { p.tiers&.any? { |tier| tier[:amount].present? }}
+      validates_presence_of :amount, unless: ->(p) { p.tiers&.any? { |tier| tier[:unit_amount].present? }}
 
       validates_inclusion_of  :interval,
                               in: %w(day week month year),
