@@ -187,7 +187,7 @@ describe 'building plans' do
           },
           {
             unit_amount: 1000,
-            up_to: nil
+            up_to: 'inf'
           }
         ]
         plan.tiers_mode = "graduated"
@@ -316,7 +316,7 @@ describe 'building plans' do
                 },
                 {
                   unit_amount: 1000,
-                  up_to: nil
+                  up_to: 'inf'
                 }
               ]
             )
@@ -345,7 +345,7 @@ describe 'building plans' do
                 {
                   unit_amount: 1000,
                   flat_amount: 0,
-                  up_to: nil
+                  up_to: 'inf'
                 }
               ]
             )
@@ -420,7 +420,7 @@ describe 'building plans' do
                 },
                 {
                   unit_amount: 1000,
-                  up_to: nil
+                  up_to: 'inf'
                 }
               ]
             )
@@ -449,7 +449,7 @@ describe 'building plans' do
                 {
                   unit_amount: 1000,
                   flat_amount: 0,
-                  up_to: nil
+                  up_to: 'inf'
                 }
               ]
             )

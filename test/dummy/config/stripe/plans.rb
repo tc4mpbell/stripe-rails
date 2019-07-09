@@ -38,7 +38,7 @@ Stripe.plan :tiered do |plan|
     },
     {
       unit_amount: 1000,
-      up_to: nil
+      up_to: 'inf'
     }
   ]
   plan.tiers_mode = "graduated"
@@ -57,7 +57,7 @@ Stripe.plan :tiered_with_flat_amount do |plan|
     {
       unit_amount: 1000,
       flat_amount: 0,
-      up_to: nil
+      up_to: 'inf'
     }
   ]
   plan.tiers_mode = "graduated"
